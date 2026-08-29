@@ -50,5 +50,6 @@ module cla4_dataflow(
       (p[3] & p[2] & p[1] & g[0]) |
       (p[3] & p[2] & p[1] & p[0] & cin);
 
+
   assign #(2) sum = p ^ {c3, c2, c1, cin};
 endmodule

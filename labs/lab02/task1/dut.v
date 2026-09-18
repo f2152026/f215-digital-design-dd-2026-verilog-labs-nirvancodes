@@ -4,9 +4,9 @@
 // time. Comment out the other one, save, and re-run the simulation.
 
 module DUT (
-  input  I0,
-  input  I1,
-  input  S,
+  input I0,
+  input I1,
+  input S,
   output Y
 );
 

@@ -1,44 +1,96 @@
-// tb.v
-// Starter testbench template -- YOU complete this file.
-
 module tb;
 
-  // TODO: declare the inputs and outputs
   reg  [2:0] t_sel;
   wire [7:0] t_dout;
 
-  // TODO: instantiate DUT here
-  lut #(.WIDTH(8), .DEPTH(8)) DUT (
-    .sel  (t_sel),
-    .dout (t_dout)
+  lut #(
+    .WIDTH(8),
+    .DEPTH(8)
+  ) U1 (
+    .sel(t_sel),
+    .dout(t_dout)
   );
 
-  // Waveform dump configuration (DO NOT CHANGE)
   string vcd_file;
   initial begin
     if ($value$plusargs("vcd=%s", vcd_file)) begin
       $dumpfile(vcd_file);
-      $dumpvars(0, DUT);
+      $dumpvars(0, U1);
     end
   end
 
   initial begin
-    // TODO: apply different input combinations
+    t_sel = 3'd0;
+    #5;
 
-    for (t_sel = 0; t_sel < 8; t_sel = t_sel + 1) begin
-      #5;
+    if (t_dout !== 8'd0)
+      $display("FAIL: sel=%0d expected=0 got=%0d", t_sel, t_dout);
+    else
+      $display("PASS: sel=%0d dout=%0d", t_sel, t_dout);
 
-      if (t_dout !== (t_sel * t_sel)) begin
-        $display("FAIL: sel=%0d got=%0d expected=%0d",
-                 t_sel, t_dout, t_sel*t_sel);
-      end
-    end
+    t_sel = 3'd1;
+    #5;
+
+    if (t_dout !== 8'd1)
+      $display("FAIL: sel=%0d expected=1 got=%0d", t_sel, t_dout);
+    else
+      $display("PASS: sel=%0d dout=%0d", t_sel, t_dout);
+
+    t_sel = 3'd2;
+    #5;
+
+    if (t_dout !== 8'd4)
+      $display("FAIL: sel=%0d expected=4 got=%0d", t_sel, t_dout);
+    else
+      $display("PASS: sel=%0d dout=%0d", t_sel, t_dout);
+
+    t_sel = 3'd3;
+    #5;
+
+    if (t_dout !== 8'd9)
+      $display("FAIL: sel=%0d expected=9 got=%0d", t_sel, t_dout);
+    else
+      $display("PASS: sel=%0d dout=%0d", t_sel, t_dout);
+
+    t_sel = 3'd4;
+    #5;
+
+    if (t_dout !== 8'd16)
+      $display("FAIL: sel=%0d expected=16 got=%0d", t_sel, t_dout);
+    else
+      $display("PASS: sel=%0d dout=%0d", t_sel, t_dout);
+
+    t_sel = 3'd5;
+    #5;
+
+    if (t_dout !== 8'd25)
+      $display("FAIL: sel=%0d expected=25 got=%0d", t_sel, t_dout);
+    else
+      $display("PASS: sel=%0d dout=%0d", t_sel, t_dout);
+
+    t_sel = 3'd6;
+    #5;
+
+    if (t_dout !== 8'd36)
+      $display("FAIL: sel=%0d expected=36 got=%0d", t_sel, t_dout);
+    else
+      $display("PASS: sel=%0d dout=%0d", t_sel, t_dout);
+
+    t_sel = 3'd7;
+    #5;
+
+    if (t_dout !== 8'd49)
+      $display("FAIL: sel=%0d expected=49 got=%0d", t_sel, t_dout);
+    else
+      $display("PASS: sel=%0d dout=%0d", t_sel, t_dout);
 
     $finish;
-
   end
 
-  initial
-    $monitor($time, " sel=%0d | dout=%0d", t_sel, t_dout);
+  initial begin
+    $monitor($time,
+             " sel=%b | dout=%d",
+             t_sel, t_dout);
+  end
 
 endmodule

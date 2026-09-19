@@ -31,6 +31,7 @@ module tb;
     end
   end
 
+
   initial begin
     // TODO: apply all 8 combinations of t_i0, t_i1, t_s, 5 time units apart,
     // then $finish. (Same pattern you used in Lab 1's tb.v.)
